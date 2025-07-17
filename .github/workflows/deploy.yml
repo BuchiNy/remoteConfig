@@ -1,5 +1,4 @@
 name: build and deploy to Firebase App Distribution
-
 on:
   push:
     branches:
@@ -29,6 +28,10 @@ jobs:
           key: ${{ runner.os }}-pub-cache-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-pub-cache-
+
+      - name: Setup debug keystore
+        run: |
+          echo "${{ secrets.DEBUG_KEYSTORE }}" | base64 -d > ~/.android/debug.keystore
 
       - name: Install dependencies
         run: flutter pub get
