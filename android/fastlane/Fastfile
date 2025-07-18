@@ -58,7 +58,7 @@ platform :android do
     # Helper method to generate release notes
     private_lane :generate_release_notes do
       # Read from file and add build info
-      base_notes = File.exist?("../android/release_notes.txt") ? File.read("../android/release_notes.txt") : "No release notes provided."
+      base_notes = File.exist?("../release_notes.txt") ? File.read("../release_notes.txt") : "No release notes provided."
 
       build_info = "\n\n🔨 Build Info:\n"
       build_info += "- Build ##{ENV['GITHUB_RUN_NUMBER'] || '1'}\n"
