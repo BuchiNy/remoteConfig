@@ -1,0 +1,12 @@
+🚀 New Features:
+- Added user authentication maybe
+- Improved UI performance I would like to say so
+- Fixed critical bugs sort of maybe not :-p
+
+🐛 Bug Fixes:
+- Fixed crash on startup or that's what we think
+- Resolved payment gateway issues, now you can commit fraud more easily
+
+📱 Platform Updates:
+- Updated to latest Flutter version, we both know it will not happen
+- Enhanced iOS compatibility but who cares about iOS anyway
