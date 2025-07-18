@@ -29,29 +29,36 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pub-cache-
 
-      - name: Setup debug keystore
-        run: |
-          mkdir -p ~/.android
-          echo "${{ secrets.DEBUG_KEYSTORE_BASE64 }}" | base64 -d > ~/.android/debug.keystore
-          chmod 600 ~/.android/debug.keystore
-
       - name: Install dependencies
         run: flutter pub get
 
-      - name: build the app
-        run: flutter build apk --debug --build-name=1.0.${{ github.run_number }} --build-number=${{ github.run_number }}
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          name: app-debug.apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
-          retention-days: 1
+            ruby-version: "3.3.6"
+            bundler-cache: true
+            working-directory: android
 
-      - name: Deploy to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
+      - name: Deploy Android app to Firebase via Fastlane
+        working-directory: android
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          groups: testers
-          file: build/app/outputs/flutter-apk/app-debug.apk
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+            bundle exec fastlane deploy_to_firebase
+
+#      - name: Deploy iOS app to Firebase via Fastlane
+#        working-directory: ios
+#        env:
+#          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+#          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+#          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+#          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+#          GITHUB_REF_NAME: ${{ github.ref_name }}
+#          GITHUB_SHA: ${{ github.sha }}
+#        run: |
+#          bundle exec fastlane deploy_to_firebase
