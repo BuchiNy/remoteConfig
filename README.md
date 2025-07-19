@@ -1,3 +1,5 @@
+[![build and deploy to Firebase App Distribution](https://github.com/BuchiNy/remoteConfig/actions/workflows/deploy.yml/badge.svg)](https://github.com/BuchiNy/remoteConfig/actions/workflows/deploy.yml)
+
 # remoteconfig
 
 A new Flutter project.
