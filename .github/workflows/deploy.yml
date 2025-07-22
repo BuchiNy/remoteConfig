@@ -3,9 +3,6 @@ on:
   pull_request:
     branches:
       - Staging
-  push:
-    branches:
-      - Staging
 
 jobs:
   Qaulity_and_test_check:
