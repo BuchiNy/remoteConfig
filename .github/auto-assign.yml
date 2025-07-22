@@ -1,0 +1,13 @@
+# Auto-assign reviewers and assignees
+addReviewers: true
+addAssignees: false
+addLabels: false
+
+reviewers:
+  - "BuchiNy"
+
+# Number of reviewers to assign
+numberOfReviewers: 1
+
+# Skip if PR is draft
+skipDraft: true

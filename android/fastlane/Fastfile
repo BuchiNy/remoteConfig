@@ -42,13 +42,13 @@ platform :android do
       #generate release note for the build
        release_notes = generate_release_notes
        # Use Flutter to build the app
-       sh("flutter build apk --debug --build-name=1.0.#{ENV['GITHUB_RUN_NUMBER'] || '1'} --build-number=#{ENV['GITHUB_RUN_NUMBER'] || '1'}")
+       sh("flutter build apk --release --build-name=1.0.#{ENV['GITHUB_RUN_NUMBER'] || '1'} --build-number=#{ENV['GITHUB_RUN_NUMBER'] || '1'}")
       firebase_app_distribution(
            app: ENV["FIREBASE_APP_ID"].strip,
            groups: "testers",
            firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"].strip,
            service_credentials_file: ENV["CREDENTIAL_FILE_CONTENT"],
-           android_artifact_path: "../build/app/outputs/flutter-apk/app-debug.apk",
+           android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
            android_artifact_type: "APK",
            debug: true,
            upload_timeout: 600, # 10 minutes
@@ -62,7 +62,6 @@ platform :android do
 
       build_info = "\n\n🔨 Build Info:\n"
       build_info += "- Build ##{ENV['GITHUB_RUN_NUMBER'] || '1'}\n"
-      build_info += "- Branch: #{ENV['GITHUB_REF_NAME'] || 'unknown'}\n"
       build_info += "- Built on: #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
 
       base_notes + build_info
