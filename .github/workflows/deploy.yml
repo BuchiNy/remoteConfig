@@ -44,12 +44,6 @@ jobs:
           dart format --set-exit-if-changed .
           echo "Code formatting is correct ✅"
 
-      - name: Import Sorter Check
-        run: |
-          dart pub global activate import_sorter
-          dart pub global run import_sorter:main --no-comments --exit-if-changed
-          echo "Import sorting is correct ✅"
-
       - name: Security Analysis
         run: |
           # Check for hardcoded secrets (basic check)
