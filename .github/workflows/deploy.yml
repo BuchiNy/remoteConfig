@@ -48,10 +48,11 @@ jobs:
           flutter analyze --fatal-infos --fatal-warnings
           echo "Static analysis passed ✅"
 
-      - name: Dart Format Check
-        run: |
-          dart format --set-exit-if-changed .
-          echo "Code formatting is correct ✅"
+      - name: Format Dart files (fix in place)
+        run: dart format .
+
+      - name: Check formatting (fail if incorrect)
+        run: dart format --set-exit-if-changed .
 
       - name: Security Analysis
         run: |
