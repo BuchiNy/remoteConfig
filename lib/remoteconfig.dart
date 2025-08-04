@@ -28,10 +28,12 @@ class RemoteConfigService {
     final prefs = await SharedPreferences.getInstance();
     _localVersion = prefs.getInt(_storedVersionKey) ?? 0;
 
-    await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: const Duration(seconds: 10),
-      minimumFetchInterval: Duration(seconds: 60),
-    ));
+    await _remoteConfig.setConfigSettings(
+      RemoteConfigSettings(
+        fetchTimeout: const Duration(seconds: 10),
+        minimumFetchInterval: Duration(seconds: 60),
+      ),
+    );
 
     await _remoteConfig.setDefaults({
       _questionsVersionKey: _localVersion,
@@ -59,15 +61,21 @@ class RemoteConfigService {
   }
 
   /// Update local version from remote config
-  void _updateLocalVersion(SharedPreferences prefs){
+  void _updateLocalVersion(SharedPreferences prefs) {
     final fetchedVersion = _remoteConfig.getInt(_questionsVersionKey);
 
     if (_localVersion != fetchedVersion) {
-      debugPrint('RemoteConfig version updated: $_localVersion -> $fetchedVersion');
+      debugPrint(
+        'RemoteConfig version updated: $_localVersion -> $fetchedVersion',
+      );
       _localVersion = fetchedVersion;
-      debugPrint('RemoteConfig version updated 2: $_localVersion -> $fetchedVersion');
+      debugPrint(
+        'RemoteConfig version updated 2: $_localVersion -> $fetchedVersion',
+      );
       prefs.setInt(_storedVersionKey, fetchedVersion);
-      debugPrint('RemoteConfig version updated 2: $_storedVersionKey -> $fetchedVersion'); // Save to persistent storage
+      debugPrint(
+        'RemoteConfig version updated 2: $_storedVersionKey -> $fetchedVersion',
+      ); // Save to persistent storage
       _onVersionChanged(fetchedVersion);
     }
   }
