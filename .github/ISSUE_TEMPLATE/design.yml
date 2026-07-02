@@ -1,0 +1,31 @@
+name: Design Task
+description: Create a task for design of proposed UI/UX
+title: '[DESIGN] '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue template is meant to be used for new design ideas and proposals
+
+  - type: textarea
+    id: design_motivation
+    attributes:
+      label: Design Motivation
+      description: Why is this design being proposed
+    validations:
+      required: true
+
+  - type: textarea
+    id: design_requirement
+    attributes:
+      label: Design Requirement
+      description: What are the requirements which the design needs to pass
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: Reference
+      description: Add any related references for the design
