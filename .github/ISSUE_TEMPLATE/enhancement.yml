@@ -1,34 +1,31 @@
-name: Feature Request
-description: Suggest a new features for this project
-title: '[FEATURE] '
+name: Enhancement
+description: Suggest places where we can improve project
+title: '[ENHANCEMENT] '
 labels: ['enhancement']
+assignees: ['BuchiNy']
 body:
-  - type: markdown
+  - type: input
+    id: affected-feature
     attributes:
-      value: |
-        This Feature Request form is used to suggest new feature for Fabla
-
-  - type: textarea
-    id: feature-description
-    attributes:
-      label: 💡 Feature Description
-      description: A clear description of what you want to happen.
+      label: 🎯 Affected Feature/Area
+      description: Which existing feature, screen, or part of Fabla does this affect?
+      placeholder: 'e.g. Onboarding flow, settings, Push notifications'
     validations:
       required: true
 
   - type: textarea
-    id: problem-statement
+    id: current-behavior
     attributes:
-      label: 🎯 Problem Statement
-      description: What problem does this feature solve?
+      label: 🔍 Current Behavior
+      description: How does this feature work today?
     validations:
       required: true
 
   - type: textarea
-    id: proposed-solution
+    id: desired-improvement
     attributes:
-      label: 💭 Proposed Solution
-      description: Describe the solution you'd like.
+      label: 💭 Desired Improvement
+      description: What should change, and why would it be better?
     validations:
       required: true
 
@@ -44,7 +41,7 @@ body:
     id: acceptance-criteria
     attributes:
       label: ✅ Acceptance Criteria
-      description: List the criteria that must be met for this feature to be considered complete.
+      description: List the criteria that must be met for this enhancement to be considered complete.
       placeholder: |
         - [ ] Criterion 1
         - [ ] Criterion 2
@@ -56,6 +53,6 @@ body:
     id: additional-context
     attributes:
       label: 📎 Additional Context
-      description: Add any other context about the feature request here.
+      description: Add any other context about the enhancement here.
     validations:
       required: false
