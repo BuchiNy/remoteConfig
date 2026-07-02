@@ -57,6 +57,7 @@ body:
       options:
       - iOS
       - Android
+      - iOS & Android
 
   - type: textarea
     id: additional-context
